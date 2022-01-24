@@ -1,0 +1,87 @@
+<div class="sidebar-menu">
+  <ul class="menu">
+    <li class="sidebar-title">Main Menu</li>
+
+    <li class="sidebar-item">
+      <a href="index.html" class="sidebar-link">
+        <i data-feather="home" width="20"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>    
+    {% if request.user.role is 1 %}
+    <li class="sidebar-item has-sub active">
+      <a href="#" class="sidebar-link">
+        <i data-feather="triangle" width="20"></i>
+        <span>User</span>
+      </a>
+      <ul class="submenu {{ active }}">
+        <li><a href="{% url 'regpus:needverified' %}">Menunggu Verifikasi</a></li>
+        <li><a href="{% url 'regpus:verified' %}">Sudah Verifikasi</a></li>
+      </ul>
+    </li>
+    {% elif request.user.role is 2 %}
+    <li class="sidebar-item has-sub">
+      <a href="#" class="sidebar-link">
+        <i data-feather="triangle" width="20"></i>
+        <span>Puskesmas Baru</span>
+      </a>
+      <ul class="submenu">
+        <li><a href="component-alert.html">Menunggu Verifikasi</a></li>
+        <li><a href="component-badge.html">Sudah Verifikasi</a></li>
+      </ul>
+    </li>
+    <li class="sidebar-item has-sub">
+      <a href="#" class="sidebar-link">
+        <i data-feather="triangle" width="20"></i>
+        <span>Perubahan Data</span>
+      </a>
+      <ul class="submenu">
+        <li><a href="component-alert.html">Menunggu Verifikasi</a></li>
+        <li><a href="component-badge.html">Sudah Verifikasi</a></li>
+      </ul>
+    </li>
+    <li class="sidebar-item has-sub">
+      <a href="#" class="sidebar-link">
+        <i data-feather="triangle" width="20"></i>
+        <span>Penghapusan</span>
+      </a>
+      <ul class="submenu">
+        <li><a href="component-alert.html">Menunggu Verifikasi</a></li>
+        <li><a href="component-badge.html">Sudah Verifikasi</a></li>
+      </ul>
+    </li>
+    {% elif request.user.role is 3 %}
+    <li class="sidebar-item active">
+      <a href="index.html" class="sidebar-link">
+        <i data-feather="home" width="20"></i>
+        <span>Progres Puskesmas</span>
+      </a>
+    </li>    
+    <li class="sidebar-item active">
+      <a href="index.html" class="sidebar-link">
+        <i data-feather="home" width="20"></i>
+        <span>Laporan</span>
+      </a>
+      <ul class="submenu">
+        <li><a href="">Agregat</a></li>
+        <li><a href="">Rekapitulasi</a></li>
+        <li><a href="">Puskesmas Aktif</a></li>
+        <li><a href="">Puskesmas Pengajuan</a></li>
+        <li><a href="">Puskesmas Terhapus</a></li>
+      </ul>
+    </li> 
+    {% elif request.user.role is 4 %}   
+    <li class="sidebar-item active">
+      <a href="index.html" class="sidebar-link">
+        <i data-feather="home" width="20"></i>
+        <span>Pengajuan</span>
+      </a>
+      <ul class="submenu">
+        <li><a href="">Registrasi Puskesmas</a></li>
+        <li><a href="">Perbaikan Puskesmas</a></li>
+        <li><a href="">Hapus</a></li>
+      </ul>
+    </li>
+    {% endif %}
+  </ul>
+</div>

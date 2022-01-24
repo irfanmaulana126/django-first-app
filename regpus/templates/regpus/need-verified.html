@@ -1,0 +1,51 @@
+{% extends 'page/index_default_be.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+{% endblock style %}
+
+{% block content %}
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            Simple Datatable
+        </div>
+        <div class="card-body">
+            <table class='table table-striped' id="table1">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>City</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+{% block script %}
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+    // Simple Datatable
+    $(document).ready(function () {
+        $('#table1').DataTable({
+            serverSide: true,
+            sAjaxSource: "{% url 'regpus:dataneedverified' %}",  // new url
+            columns: [
+                {name: "name", data: 0},
+                {name: "code", data: 1},
+                {name: "description", data: 2},
+                {name: "description", data: 3},
+                {name: "description", data: 4},
+            ],
+        });
+    });
+</script>
+{% endblock script %}

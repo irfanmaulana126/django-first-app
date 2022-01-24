@@ -1,0 +1,7 @@
+<label for="country-floating">Kabupaten/Kota</label>
+<select id="id_kab_kota" name="regencies" class="form-control">
+    <option value=""></option>
+    {% for kab in arrs %}
+    <option value="{{kab.pk}}">{{kab.name}}</option>
+    {% endfor %}
+</select>

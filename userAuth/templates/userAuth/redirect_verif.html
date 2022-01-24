@@ -1,0 +1,15 @@
+{% extends "page/index_auth.html" %}
+{% load static %}
+{% block content %}
+<div class="card-body">
+    <div class="text-center mb-5">
+        <img src="{% static "assets/images/favicon.svg" %}" height="48" class='mb-4'>
+        <h3>Verifikasi Email Anda!</h3>
+        <p>Please verified your account to activied.</p>
+    </div>
+    <div class="d-grid">
+        <button class="btn btn-primary float-end">Back to home</button>
+    </div>
+    
+</div>
+{% endblock content %}

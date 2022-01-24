@@ -1,0 +1,135 @@
+{% extends "page/index_auth.html" %}
+{% load static %}
+{% block external_css %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container .select2-selection--single{
+            height: 35px;
+        }
+    </style>
+{% endblock external_css %}
+{% block content %}
+<div class="card-body">
+    <div class="text-center mb-5">
+        <img src="{% static 'assets/images/favicon.svg' %}" height="48" class='mb-4'>
+        <h3>Sign Up</h3>
+        <p>Please fill the form to register.</p>
+    </div>
+    <form action="{% url 'otentik:register' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="form-group">
+                    <label for="first-name-column">Full Name</label>
+                    <input type="text" id="first-name-column" class="form-control"
+                        name="first_name">
+                </div>
+            </div>
+            <div class="col-md-12 col-12">
+                <div class="form-group">
+                    <label for="username-column">NIK</label>
+                    <input type="text" id="username-column" class="form-control"
+                        name="nik">
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="email-id-column">Email</label>
+                    <input type="email" id="email-id-column" class="form-control"
+                        name="email">
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="telephone-column">Telepon</label>
+                    <input type="text" id="telephone-column" class="form-control"
+                        name="phone">
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="password-column">password</label>
+                    <input type="password" id="password-column" class="form-control"
+                        name="password1">
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="password-column">Re-password</label>
+                    <input type="password" id="password-column" class="form-control"
+                        name="password2">
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="nama-pimpinan-column">Nama Pimpinan</label>
+                    <input type="text" id="nama-pimpinan-column" class="form-control"
+                        name="nmpimp">
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="telp-pimpinan-column">Nomor Telepon Pimpinan</label>
+                    <input type="text" id="telp-pimpinan-column" class="form-control"
+                        name="telpimp">
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label for="country-floating">Provinsi</label>
+                    <select id="id_prov" name="province" class="form-control">
+                        <option value=""></option>
+                        {% for prov in provinces %}
+                        <option value="{{prov.pk}}">{{prov.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group" id="kab-list">
+                   
+                </div>
+            </div>
+        </diV>
+
+        <a href="{% url 'otentik:login' %}">Have an account? Login</a>
+        <div class="clearfix">
+            <button class="btn btn-primary float-end">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+{% block external_js %}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+    $("#id_prov").select2({
+        placeholder: "Pilih Provinsi Dinas Kesehatan Kabupaten Kota"
+    });
+
+    $("#id_prov").change(function(){
+        let id_prov = $(this).val();
+        $.ajax({
+            url: '{% url "otentik:get_regencies" %}',
+            type:'POST',
+            data:{'id_prov':id_prov},
+            dataType: 'json',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            beforeSend: function() {
+                $("#kab-list").html("Loading..");
+            }
+        }).done(function(res){
+            $("#kab-list").html(res.htmly);
+
+            $("#id_kab_kota").select2({
+                placeholder: "Pilih Kabupaten / Kota"
+            });
+        }).fail(function(){
+            alert( "error" );
+        })
+    })
+
+    </script>
+{% endblock external_js %}

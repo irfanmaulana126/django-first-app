@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Voler Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap.css" %}">
+
+    <link rel="shortcut icon" href="{% static "assets/images/favicon.svg" %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "assets/css/app.css" %}">
+    {% block external_css %}
+      
+    {% endblock external_css %}
+</head>
+
+<body>
+    <div id="auth">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 mx-auto">
+                    <div class="card pt-4">
+                        {% block content %}{% endblock content %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    {% block external_js %}{% endblock external_js %}
+    <script src="{% static "assets/js/feather-icons/feather.min.js" %}"></script>
+    <script src="{% static "assets/js/app.js" %}"></script>
+
+    <script src="{% static "assets/js/main.js" %}"></script>
+</body>
+
+</html>
